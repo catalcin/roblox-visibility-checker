@@ -12,7 +12,7 @@ body = {
 
 printlogs = False
 plinput = input("Do you want to print logs? (Y/n)")
-plinput.lower()
+plinput = plinput.lower()
 if plinput == "y":
     printlogs=True
 
@@ -68,5 +68,6 @@ while True:
         isOnline = True
         isOnGame = False
         isOnStudio = False
+
 
     time.sleep(1.6715)
