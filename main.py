@@ -33,43 +33,44 @@ while True:
     if printlogs: print(json.dumps(data, indent=4))
     Attempt += 1
 
-    if data['userPresences'][0]['userPresenceType'] == 0:
-        print(f"User is offline, attempt: #{Attempt}")
-        if isOnline == True or Attempt == 1:
-            toaster.show_toast(title="User offline", msg="The user is offline", duration=4)
-        isOnGame = False
-        isOnStudio = False
-        isOnline = False
+    match data['userPresences'][0]['userPresenceType']:
+        case 0:
+            print(f"User is offline, attempt: #{Attempt}")
+            if isOnline == True or Attempt == 1:
+                toaster.show_toast(title="User offline", msg="The user is offline", duration=4)
+            isOnGame = False
+            isOnStudio = False
+            isOnline = False
 
-    elif data['userPresences'][0]['userPresenceType'] == 1:
-        print(f"User is online! attempt: #{Attempt}")
-        if isOnline == False:
-            toaster.show_toast(title="User online", msg="The user is online!", duration=7)
-        isOnline = True
-        isOnGame = False
+        case 1:
+            print(f"User is online! attempt: #{Attempt}")
+            if isOnline == False:
+                toaster.show_toast(title="User online", msg="The user is online!", duration=7)
+            isOnline = True
+            isOnGame = False
 
-    elif data['userPresences'][0]['userPresenceType'] == 2:
-        print(f"User is playing a game! attempt: #{Attempt}")
-        if isOnGame == False:
-            toaster.show_toast(title="User playing game!", msg="The user is inside a game!", duration=6)
-        isOnGame = True
-        isOnline = False
+        case 2:
+            print(f"User is playing a game! attempt: #{Attempt}")
+            if isOnGame == False:
+                toaster.show_toast(title="User playing game!", msg="The user is inside a game!", duration=6)
+            isOnGame = True
+            isOnline = False
 
-    elif data['userPresences'][0]['userPresenceType'] == 3:
-        print(f"User is on studio! attempt: #{Attempt}")
-        if isOnStudio == False:
-            toaster.show_toast(title="User on studio", msg="The user is inside roblox studio!", duration=15)
-        isOnline = False
-        isOnGame  = False
-        isOnStudio = True
+        case 3:
+            print(f"User is on studio! attempt: #{Attempt}")
+            if isOnStudio == False:
+                toaster.show_toast(title="User on studio", msg="The user is inside roblox studio!", duration=15)
+            isOnline = False
+            isOnGame  = False
+            isOnStudio = True
 
-    elif data['userPresences'][0]['userPresenceType'] == 4:
-        print(f"User is invisible??? attempt: #{Attempt}")
-        if isOnline == False:
-            toaster.show_toast(title="User invisible..", msg="The user is invisible!", duration=10)
-        isOnline = True
-        isOnGame = False
-        isOnStudio = False
+        case 4:
+            print(f"User is invisible??? attempt: #{Attempt}")
+            if isOnline == False:
+                toaster.show_toast(title="User invisible..", msg="The user is invisible!", duration=10)
+            isOnline = True
+            isOnGame = False
+            isOnStudio = False
     
 
     time.sleep(1.6715)
